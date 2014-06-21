@@ -1,6 +1,8 @@
 Indie.Views.Frame = Backbone.View.extend({
   template: JST['frame/frame'],
   render: function(){
+
+    console.log('View#render')
     console.log(this.collection)
     var renderedContent = this.template({
       events: this.collection,
@@ -12,11 +14,12 @@ Indie.Views.Frame = Backbone.View.extend({
     //   console.log(event)
     // })
 
-
-
     return this;
   },
-  initialize: function(){
+  addTile: function(){
 
+  },
+  initialize: function(){
+    this.collection.on('change add reset', this.render, this);
   },
 })

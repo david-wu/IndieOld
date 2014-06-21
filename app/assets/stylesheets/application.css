@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.tile-img {
+  width: 220px;
+  height: 220px;
+}
