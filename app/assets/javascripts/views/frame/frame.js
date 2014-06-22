@@ -1,5 +1,5 @@
 Indie.Views.Frame = Backbone.View.extend({
-  template: JST['frame/frame'],
+  template: JST['frame/tiles'],
   render: function(){
 
     console.log('View#render')

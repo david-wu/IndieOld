@@ -1,1 +1,13 @@
-<div class='panel'><%= event.title%></div>
+<div class='col-sm-4'>
+  <div class='panel'>
+    <a href='#/events/<%= event.get('id') %>'>
+      <div class='tile-category'>cat:<%= event.get('category') %></div>
+      <div class='tile-title'>title:<%= event.get('title') %></div>
+      <img class='tile-img' src='<%= event.get('img_src') %>'>
+      <div class='tile-description'>Desc:<%= event.get('description') %></div>
+      <div class='tile-raised'>Raised:<%= event.get('funds_raised') %></div>
+      <div class='tile-goal'>Goal:<%= event.get('funds_goal') %></div>
+      <div class='ends'>Ends:<%= event.get('end')-Date.now() %></div>
+    </a>
+  </div>
+</div>

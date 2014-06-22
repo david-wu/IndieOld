@@ -18,3 +18,29 @@
   width: 220px;
   height: 220px;
 }
+
+#footer{
+  background-color: black;
+}
+
+.hr{
+  color: white;
+}
+
+#footerEl{
+  color: white;
+}
+
+.event-category-button {
+  font-size: 25px;
+  width: 235px;
+  height: 75px;
+}
+
+.row.show-row{
+  font-family: "Benton Sans Medium", "Helvetica", "sans-serif";
+  color: #2a2a2a;
+  background-color: #f5f5f5;
+  padding: 20px 20px;
+  margin-bottom: 30px;
+}
