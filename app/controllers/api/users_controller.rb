@@ -1,5 +1,16 @@
 class Api::UsersController < ApplicationController
 
+  def login
+    @user = User.find_by!(email: user_params[:email])
+    if(@user.is_password?(user_params[:password]))
+      @user.reset_token
+      @user.password_digest = nil
+      render json: @user
+    else
+      render json: {errors: ['Invalid username/password']}, status: 422
+    end
+  end
+
   def create
     @user = User.new(user_params)
     @user.password = user_params[:password]

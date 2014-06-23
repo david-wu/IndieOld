@@ -1,5 +1,10 @@
 class Api::EventsController < ApplicationController
 
+  def index
+    @events = Event.all
+    render json: @events
+  end
+
   def update
     @event = Event.find(params['id'])
     render json: @event
@@ -13,6 +18,16 @@ class Api::EventsController < ApplicationController
       render json: @event
     else
       render json: {errors: @event.errors.full_messages}, status: 422
+    end
+  end
+
+  def destroy
+    @event = Event.find(event_params)
+    @user = User.find_by(session_token: params['session_token'])
+    if(@event.id == @user.id)
+      render json: @event.destroy
+    else
+      render json: {errors: ['not your event!']}, status: 422
     end
   end
 

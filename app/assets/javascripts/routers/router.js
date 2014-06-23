@@ -16,17 +16,21 @@ window.Indie.Routers.Main = Backbone.Router.extend({
       fname: Cookie.get('fname'),
       session_token: Cookie.get('session_token'),
     });
+    this._events = new Indie.Collections.Events()
     this._generateNavBar(this._currentUser);
     this._generateFooter();
   },
   explore: function(){
     console.log('Router#Index')
-
-    var events = new Indie.Collections.Events()
     var view = new Indie.Views.Frame({
-      collection: events
+      collection: this._events
     });
-    //get and render in callback
+    this._events.fetch({
+      success: function(){
+        view.render();
+      }
+    })
+
     var event = new Indie.Models.Event({
       // needed for tiles
       id: 123,
@@ -87,7 +91,7 @@ window.Indie.Routers.Main = Backbone.Router.extend({
       end: Date.now()+(60*60*24*1),
       place: 'here',
     });
-    events.add([event, event2, event3, event4]);
+    this._events.add([event, event2, event3, event4]);
 
 
     this._swapView(view);
