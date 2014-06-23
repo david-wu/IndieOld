@@ -1,3 +1,3 @@
 Indie.Models.Event = Backbone.Model.extend({
-  urlRoot: "",
+  urlRoot: "/api/events",
 })

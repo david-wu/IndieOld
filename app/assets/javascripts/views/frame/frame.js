@@ -1,9 +1,6 @@
 Indie.Views.Frame = Backbone.View.extend({
   template: JST['frame/tiles'],
   render: function(){
-
-    console.log('View#render')
-    console.log(this.collection)
     var renderedContent = this.template({
       events: this.collection,
     });

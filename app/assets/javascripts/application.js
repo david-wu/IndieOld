@@ -16,6 +16,7 @@
 //= require bootstrap.min
 // require turbolinks
 //= require backbone
+//= require jquery.serializeJSON
 // require backbone.marionette
 //= require indie
 //= require_tree ../templates

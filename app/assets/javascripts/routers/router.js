@@ -2,38 +2,22 @@ window.Indie.Routers.Main = Backbone.Router.extend({
   routes: {
     'explore': 'explore',
     'events/:id': 'showEvent',
-    'user/new': 'newUser',
+    'user/new': 'signUp',
+    'user/login': 'signUp',
+    'user/logout': 'signOut',
     'event/new': 'newEvent',
   },
   initialize: function(){
-    $mainTiles = $('#mainTiles');
     $navBarEl = $('#navBarEl');
-    $footerEl = $('#footerEl');
-    $viewTile = $('#viewTile');
     $mainEl = $('#mainEl');
-
-    this._generateNavBar();
+    $footerEl = $('#footerEl');
+    // unsecure
+    this._currentUser = new Indie.Models.User({
+      fname: Cookie.get('fname'),
+      session_token: Cookie.get('session_token'),
+    });
+    this._generateNavBar(this._currentUser);
     this._generateFooter();
-  },
-  newEvent: function(){
-    console.log('router#newEvent')
-    var newEventView = new Indie.Views.NewEvent();
-    this._swapView(newEventView);
-    newEventView.render();
-  },
-  newUser: function(){
-    console.log('router#newUser')
-    var newUserView = new Indie.Views.NewUser();
-    this._swapView(newUserView);
-    newUserView.render();
-  },
-  showEvent: function(id){
-    console.log('open:'+id)
-    $mainTiles.hide();
-
-    //get tile attributes
-
-
   },
   explore: function(){
     console.log('Router#Index')
@@ -46,6 +30,7 @@ window.Indie.Routers.Main = Backbone.Router.extend({
     var event = new Indie.Models.Event({
       // needed for tiles
       id: 123,
+      owner_id: 3,
       category: 'technology',
       img_src: 'http://i.imgur.com/aQ1pCor.jpg',
       title: 'super phone',
@@ -60,6 +45,7 @@ window.Indie.Routers.Main = Backbone.Router.extend({
     var event2 = new Indie.Models.Event({
       // needed for tiles
       id:321,
+      owner_id: 4,
       category: 'techno',
       img_src: 'http://i.imgur.com/x3xgsdk.jpg',
       title: 'super poop',
@@ -74,6 +60,7 @@ window.Indie.Routers.Main = Backbone.Router.extend({
     var event3 = new Indie.Models.Event({
       // needed for tiles
       id: 333,
+      owner_id: 3,
       category: 'arts',
       img_src: 'http://i.imgur.com/x3xgsdk.jpg',
       title: 'super poop',
@@ -85,12 +72,52 @@ window.Indie.Routers.Main = Backbone.Router.extend({
       end: Date.now()+(60*60*24*1),
       place: 'here',
     });
-    events.add([event, event2, event3]);
+    var event4 = new Indie.Models.Event({
+      // needed for tiles
+      id: 3335,
+      owner_id: 3,
+      category: 'arts',
+      img_src: 'http://i.imgur.com/x3xgsdk.jpg',
+      title: 'super poop',
+      description: 'yea! lets go make super poop',
+      primary_product_id: 5,
+      funds_raised: '66',
+      funds_goal: '6666',
+      start: Date.now(),
+      end: Date.now()+(60*60*24*1),
+      place: 'here',
+    });
+    events.add([event, event2, event3, event4]);
+
 
     this._swapView(view);
   },
-  _generateNavBar: function(){
-    var barView = new Indie.Views.NavBar();
+  signUp: function(){
+    console.log('router#newUser')
+    var newUserView = new Indie.Views.NewUser();
+    this._swapView(newUserView);
+    newUserView.render();
+  },
+  signOut: function(){
+    Cookie.delete('fname')
+    Cookie.delete('session_token')
+    this._currentUser = new Indie.Models.User();
+    this.navigate('explore', {trigger: true});
+    this._generateNavBar(this._currentUser);
+  },
+  newEvent: function(){
+    console.log('router#newEvent')
+    var newEventView = new Indie.Views.NewEvent();
+    this._swapView(newEventView);
+    newEventView.render();
+  },
+  showEvent: function(id){
+    console.log('open:'+id)
+  },
+  _generateNavBar: function(user){
+    var barView = new Indie.Views.NavBar({
+      user: user
+    });
     this._swapNavBar(barView);
     barView.render();
   },

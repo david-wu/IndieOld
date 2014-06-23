@@ -1,3 +1,3 @@
-Indie.Models.Event = Backbone.Model.extend({
+Indie.Models.Comment = Backbone.Model.extend({
   urlRoot: "",
 })
