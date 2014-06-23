@@ -11,10 +11,11 @@ window.Indie.Routers.Main = Backbone.Router.extend({
     $navBarEl = $('#navBarEl');
     $mainEl = $('#mainEl');
     $footerEl = $('#footerEl');
-    // unsecure
+    // API is secure
     this._currentUser = new Indie.Models.User({
       fname: Cookie.get('fname'),
       session_token: Cookie.get('session_token'),
+      user_id: Cookie.get('user_id'),
     });
     this._events = new Indie.Collections.Events()
     this._generateNavBar(this._currentUser);
@@ -105,6 +106,7 @@ window.Indie.Routers.Main = Backbone.Router.extend({
   signOut: function(){
     Cookie.delete('fname')
     Cookie.delete('session_token')
+    Cookie.delete('user_id')
     this._currentUser = new Indie.Models.User();
     this.navigate('explore', {trigger: true});
     this._generateNavBar(this._currentUser);
@@ -117,6 +119,19 @@ window.Indie.Routers.Main = Backbone.Router.extend({
   },
   showEvent: function(id){
     console.log('open:'+id)
+    if(!this._events.get(id)){
+      this._events.set(new Indie.Models.Event({id:id}));
+    }
+    var eventShow = new Indie.Views.EventShow({
+      event: this._events.get(id)
+    })
+    this._events.get(id).fetch({
+      success: function(response){
+        console.log(response)
+      }
+    })
+    this._swapView(eventShow);
+    eventShow.render();
   },
   _generateNavBar: function(user){
     var barView = new Indie.Views.NavBar({

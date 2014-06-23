@@ -1,0 +1,14 @@
+<div class='container'>
+  <div class='row'>
+    <a href='#/events/<%= event.get('id') %>'>
+      <h1><%= event.get('title') %></h1>
+    </a>
+    <img src='<%= event.get('img_src') %>'>
+    <div class='tile-raised'>Raised:<%= event.get('funds_raised') %></div>
+    <div class='tile-goal'>Goal:<%= event.get('funds_goal') %></div>
+    <div class='tile-category'>cat:<%= event.get('category') %></div>
+    <div class='tile-description'>Desc:<%= event.get('description') %></div>
+  </div>
+</div>
+
+

@@ -22,9 +22,13 @@ Indie.Views.NewEvent = Backbone.View.extend({
     return this;
   },
   setCurrency: function(event){
+    $(event.toElement).addClass('active');
+    $(event.toElement).siblings().removeClass('active');
     this.event.set('currency',event.toElement.innerHTML)
   },
   setCategory: function(event){
+    $(event.toElement).addClass('active');
+    $(event.toElement).siblings().removeClass('active');
     this.event.set('category',event.toElement.innerHTML)
   },
   setUp: function(){
@@ -40,6 +44,9 @@ Indie.Views.NewEvent = Backbone.View.extend({
     this.event.save([], {
       success: function(response){
         Indie.router.navigate('events/'+response.get('id'), {trigger: true})
+      },
+      error: function(response){
+        $('#event-new-errors').html('ERROR! ' + response)
       }
     });
     return this;

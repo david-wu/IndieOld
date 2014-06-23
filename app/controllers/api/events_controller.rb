@@ -5,6 +5,11 @@ class Api::EventsController < ApplicationController
     render json: @events
   end
 
+  def show
+    @event = Event.find(params['id'])
+    render json: @event
+  end
+
   def update
     @event = Event.find(params['id'])
     render json: @event
