@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
     self.description ||= 'Missing Description'
     self.funds_raised ||= 0
     self.title ||= 'Missing Title'
+    self.img_src ||= 'assets/missing_image.png'
   end
 
 end
