@@ -12,6 +12,8 @@ class Api::EventsController < ApplicationController
 
   def update
     @event = Event.find(params['id'])
+    @event.update_attributes(event_params)
+    @event.save
     render json: @event
   end
 

@@ -1,14 +1,62 @@
-<div class='container'>
-  <div class='row'>
-    <a href='#/events/<%= event.get('id') %>'>
-      <h1><%= event.get('title') %></h1>
-    </a>
-    <img src='<%= event.get('img_src') %>'>
-    <div class='tile-raised'>Raised:<%= event.get('funds_raised') %></div>
-    <div class='tile-goal'>Goal:<%= event.get('funds_goal') %></div>
-    <div class='tile-category'>cat:<%= event.get('category') %></div>
-    <div class='tile-description'>Desc:<%= event.get('description') %></div>
+<% if(parseInt(Cookie.get('user_id')) === event.get('owner_id')){ %>
+  <div class='container'>
+    <div class='row'>
+
+      <h1>
+        <%= event.get('title') %>
+        <span data-attr='title' class="glyphicon glyphicon-pencil"></span>
+      </h1>
+
+      <h4>
+        <%= event.get('sub_title') %>
+        <span data-attr='sub_title' class="glyphicon glyphicon-pencil"></span>
+      </h4>
+
+      <div class='tile-category'>
+        cat:<%= event.get('category') %>
+        <span data-attr='category' class="glyphicon glyphicon-pencil"></span>
+      </div>
+
+    </div><br><hr><br>
+
+    <div class='row'>
+
+      <div class='col-sm-8'>
+        <div class='tile-description'>
+          Desc:<%= event.get('description') %>
+          <span data-attr='description' class="glyphicon glyphicon-pencil"></span>
+        </div>
+      </div>
+
+      <div class='col-sm-4'>
+        <div class='tile-raised'>
+          $<%= event.get('funds_raised') %> <br>
+          Raised of $<%= event.get('funds_goal') %> goal
+          <span data-attr='funds_goal' class="glyphicon glyphicon-pencil"></span><br>
+          <%= parseInt(event.get('funds_raised')*100/event.get('funds_goal')) %>%
+
+        </div>
+        <div>
+          <img src='<%= event.get('img_src') %>'>
+          <span data-attr='img_src' class="glyphicon glyphicon-pencil"></span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+<% }else{ %>
+  <div class='container'>
+    <div class='row'>
+      <a href='#/events/<%= event.get('id') %>'>
+        <h1><%= event.get('title') %></h1>
+      </a>
+      <img src='<%= event.get('img_src') %>'>
+      <div class='tile-raised'>Raised:<%= event.get('funds_raised') %></div>
+      <div class='tile-goal'>Goal:<%= event.get('funds_goal') %></div>
+      <div class='tile-category'>cat:<%= event.get('category') %></div>
+      <div class='tile-description'>Desc:<%= event.get('description') %></div>
+    </div>
+  </div>
+<% } %>
+
 
 
