@@ -1,5 +1,6 @@
 window.Indie.Routers.Main = Backbone.Router.extend({
   routes: {
+    '': 'explore',
     'explore': 'explore',
     'events/:id': 'showEvent',
     'user/new': 'signUp',
@@ -98,7 +99,6 @@ window.Indie.Routers.Main = Backbone.Router.extend({
     this._swapView(view);
   },
   signUp: function(){
-    console.log('router#newUser')
     var newUserView = new Indie.Views.NewUser();
     this._swapView(newUserView);
     newUserView.render();
@@ -112,24 +112,22 @@ window.Indie.Routers.Main = Backbone.Router.extend({
     this._generateNavBar(this._currentUser);
   },
   newEvent: function(){
-    console.log('router#newEvent')
     var newEventView = new Indie.Views.NewEvent();
     this._swapView(newEventView);
     newEventView.render();
   },
   showEvent: function(id){
-    console.log('open:'+id)
     if(!this._events.get(id)){
       this._events.set(new Indie.Models.Event({id:id}));
     }
     var eventShow = new Indie.Views.EventShow({
       event: this._events.get(id)
-    })
+    });
     this._events.get(id).fetch({
       success: function(response){
         console.log(response)
       }
-    })
+    });
     this._swapView(eventShow);
     eventShow.render();
   },
