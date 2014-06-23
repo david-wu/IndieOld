@@ -5,10 +5,10 @@ group :development do
  gem 'binding_of_caller'
  # gem 'sqlite3'
 end
-
 gem 'pg'
 gem 'bcrypt'
-# gem 'marionette-rails'
+
+
 gem 'backbone-on-rails'
 gem 'jquery-ui-rails'
 gem 'rails_12factor'
