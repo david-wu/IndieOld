@@ -47,7 +47,7 @@ class Api::EventsController < ApplicationController
 
   def event_params
     params.permit(:id, :owner_id, :category, :img_src, :title, :description,
-    :funds_raised, :funds_goal, :start, :end, :place)
+    :funds_raised, :funds_goal, :start, :end, :place, :currency, :body)
   end
 
 end

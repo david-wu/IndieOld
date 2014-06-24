@@ -40,10 +40,21 @@
       <div class='tile-raised'>
         $<span id='amount-raised'><%= event.get('funds_raised') %></span>
         <%= event.get('currency') %>USD<br>
-        Raised of $<%= event.get('funds_goal') %> goal
-        <% if(is_owned){ %>
-          <span data-attr='funds_goal' class="glyphicon glyphicon-pencil"></span><br>
-        <% } %>
+        Raised of $
+        <span>
+          <%= event.get('funds_goal') %> goal
+          <% if(is_owned){ %>
+            <span data-attr='funds_goal' class="glyphicon glyphicon-pencil"></span><br>
+          <% } %>
+        </span>
+        <div id='progress-bar-<%= event.get('id') %>'></div>
+        <script>
+          var $pb = $('#progress-bar-'+ <%= event.get('id') %>)
+          $pb.progressbar({
+            value: <%= parseInt(event.get('funds_raised')*100/event.get('funds_goal')) %>
+          })
+        </script>
+        <br>
         <%= parseInt(event.get('funds_raised')*100/event.get('funds_goal')) %>%<br>
         <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#fund-modal">
           Contribute!
