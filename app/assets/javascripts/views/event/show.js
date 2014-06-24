@@ -32,6 +32,7 @@ Indie.Views.EventShow = Backbone.View.extend({
       if(event.keyCode === 13){
         event.preventDefault()
         that.event.set(attr, $('#edit-attr-field').val())
+        that.event.set('session_token', Cookie.get('session_token'))
         that.event.save();
       }
     })

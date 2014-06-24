@@ -33,8 +33,8 @@
           $<%= event.get('funds_raised') %> <br>
           Raised of $<%= event.get('funds_goal') %> goal
           <span data-attr='funds_goal' class="glyphicon glyphicon-pencil"></span><br>
-          <%= parseInt(event.get('funds_raised')*100/event.get('funds_goal')) %>%
-
+          <%= parseInt(event.get('funds_raised')*100/event.get('funds_goal')) %>%<br>
+          <button type="button" class="btn-contribute btn btn-success">Contribute!</button>
         </div>
         <div>
           <img src='<%= event.get('img_src') %>'>

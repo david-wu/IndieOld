@@ -12,9 +12,14 @@ class Api::EventsController < ApplicationController
 
   def update
     @event = Event.find(params['id'])
-    @event.update_attributes(event_params)
-    @event.save
-    render json: @event
+    @user = User.find_by(session_token: params['session_token'])
+    if(@user.id == @event.owner_id)
+      @event.update_attributes(event_params)
+      @event.save
+      render json: @event
+    else
+      render json: {errors: ['not your event!']}, status: 422
+    end
   end
 
   def create
