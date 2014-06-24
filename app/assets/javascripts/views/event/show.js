@@ -14,9 +14,9 @@ Indie.Views.EventShow = Backbone.View.extend({
     var $ar = $('#amount-raised')
     var originalValue = parseInt($ar.html())
     $ar.html(parseInt($ar.html())+parseInt(fundsToAdd))
-    // this.event.set('funds_raised', this.event.get('funds_raised')+parseInt(fundsToAdd));
-    // this.render();
-
+    this.event.set('funds_raised', this.event.get('funds_raised')+parseInt(fundsToAdd));
+    this.event.set('session_token', Cookie.get('session_token'))
+    this.event.save();
   },
   // clean this up!
   editEvent: function(event){

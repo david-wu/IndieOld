@@ -12,6 +12,7 @@ class Api::EventsController < ApplicationController
 
   def update
     @event = Event.find(params['id'])
+    p [params['session_token']]
     @user = User.find_by(session_token: params['session_token'])
     if(@user.id == @event.owner_id)
       @event.update_attributes(event_params)
