@@ -30,6 +30,12 @@
   height: 220px;
 }
 
+.tile.col-sm-4 {
+  width: 250px;
+  height: 370px;
+  border: 1px solid #d4d4d4
+}
+
 #footer{
   background-color: black;
 }
