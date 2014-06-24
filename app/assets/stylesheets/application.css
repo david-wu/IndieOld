@@ -37,6 +37,10 @@ a {
   height: 220px;
 }
 
+.product-img{
+  width: 100%;
+}
+
 .tile {
   width: 220px;
   border: 1px solid #d4d4d4;

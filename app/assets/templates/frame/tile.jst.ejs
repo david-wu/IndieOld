@@ -1,7 +1,9 @@
-<a href='#events/<%= event.get('id') %>'>
+
 <div class='col-sm-4'>
+
   <div class='tile-category'><h3><%= event.get('category') %></h3></div>
   <div class='tile'>
+    <a href='#events/<%= event.get('id') %>'>
     <img class='tile-img' src='<%= event.get('img_src') %>'>
     <div class='tile-title'><strong><%= event.get('title') %></strong></div>
     <div class='tile-description'><%= event.get('description') %></div><br>
@@ -14,6 +16,7 @@
       })
     </script>
     <div class='tile-goal'><%= parseInt(event.get('funds_raised')*100/event.get('funds_goal')) %>%</div>
+    </a>
   </div>
 </div>
-</a>
+

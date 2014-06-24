@@ -17,7 +17,7 @@
     </h4>
 
     <div class='tile-category'>
-      cat:<%= event.get('category') %>
+      <%= event.get('category') %>
       <% if(is_owned){ %>
         <span data-attr='category' class="glyphicon glyphicon-pencil"></span>
       <% } %>
@@ -29,7 +29,7 @@
 
     <div class='col-sm-8'>
       <div class='tile-body'>
-        Desc:<%= event.get('body') %>
+        <%= event.get('body') %>
         <% if(is_owned){ %>
           <span data-attr='body' class="glyphicon glyphicon-pencil"></span>
         <% } %>
@@ -38,7 +38,8 @@
 
     <div class='col-sm-4'>
       <div class='tile-raised'>
-        $<span id='amount-raised'><%= event.get('funds_raised') %></span> <br>
+        $<span id='amount-raised'><%= event.get('funds_raised') %></span>
+        <%= event.get('currency') %>USD<br>
         Raised of $<%= event.get('funds_goal') %> goal
         <% if(is_owned){ %>
           <span data-attr='funds_goal' class="glyphicon glyphicon-pencil"></span><br>
@@ -66,15 +67,13 @@
             </div>
           </div>
         </div>
-
-
-      </div>
+      </div><br><hr>
       <div>
-        <br><img src='<%= event.get('img_src') %>'>
+        <img class='product-img' src='<%= event.get('img_src') %>'>
         <% if(is_owned){ %>
           <span data-attr='img_src' class="glyphicon glyphicon-pencil"></span>
         <% } %>
-      </div>
+      </div><br>
     </div>
   </div>
 </div>
