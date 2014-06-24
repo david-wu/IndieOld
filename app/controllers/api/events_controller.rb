@@ -14,12 +14,13 @@ class Api::EventsController < ApplicationController
     @event = Event.find(params['id'])
     p [params['session_token']]
     @user = User.find_by(session_token: params['session_token'])
-    if(@user.id == @event.owner_id)
+    if(@user && @user.id == @event.owner_id)
       @event.update_attributes(event_params)
       @event.save
       render json: @event
-    else
-      render json: {errors: ['not your event!']}, status: 422
+    elsif(@event.funds_raised < event_params['funds_raised'])
+      @event.funds_raised = event_params['funds_raised']
+      @event.save
     end
   end
 
