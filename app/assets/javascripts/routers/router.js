@@ -48,7 +48,6 @@ window.Indie.Routers.Main = Backbone.Router.extend({
     this._generateNavBar(this._currentUser);
   },
   newEvent: function(){
-    debugger;
     if(!Cookie.get('session_token')){
       this.navigate('user/login', {trigger: true});
       return false;

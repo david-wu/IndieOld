@@ -18,6 +18,7 @@
 //= require backbone
 //= require jquery.serializeJSON
 // require backbone.marionette
+//= require jquery.ui.all
 //= require indie
 //= require_tree ../templates
 //= require_tree ./models

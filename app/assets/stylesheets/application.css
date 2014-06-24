@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require bootstrap.min
+ *= require jquery.ui.all
  */
 
 /*bootstrap glyphicons*/
@@ -24,16 +25,26 @@
        url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
-
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+a {
+  color: black;
+}
 .tile-img {
   width: 220px;
   height: 220px;
 }
 
-.tile.col-sm-4 {
-  width: 250px;
-  height: 370px;
-  border: 1px solid #d4d4d4
+.tile {
+  width: 220px;
+  border: 1px solid #d4d4d4;
+  opacity: 0.8;
+}
+
+.tile:hover {
+  opacity: 1;
 }
 
 #footer{

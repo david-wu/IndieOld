@@ -2,10 +2,21 @@ Indie.Views.EventShow = Backbone.View.extend({
   templateNew: JST['event/show'],
   events: {
     'click .glyphicon-pencil.glyphicon': "editEvent",
+    'click .btn-contribute': 'fundEvent'
   },
   initialize: function(options){
     this.event = options.event
     this.event.on('change add reset sync', this.render, this);
+  },
+  fundEvent: function(event){
+    console.log('fund')
+    var fundsToAdd = $('.contribution-field').val();
+    var $ar = $('#amount-raised')
+    var originalValue = parseInt($ar.html())
+    $ar.html(parseInt($ar.html())+parseInt(fundsToAdd))
+    // this.event.set('funds_raised', this.event.get('funds_raised')+parseInt(fundsToAdd));
+    // this.render();
+
   },
   // clean this up!
   editEvent: function(event){

@@ -1,62 +1,80 @@
-<% if(parseInt(Cookie.get('user_id')) === event.get('owner_id')){ %>
-  <div class='container'>
-    <div class='row'>
+<% if(parseInt(Cookie.get('user_id')) === event.get('owner_id')){ var is_owned = true } %>
+<div class='container'>
+  <div class='row'>
 
-      <h1>
-        <%= event.get('title') %>
+    <h1>
+      <%= event.get('title') %>
+      <% if(is_owned){ %>
         <span data-attr='title' class="glyphicon glyphicon-pencil"></span>
-      </h1>
+      <% } %>
+    </h1>
 
-      <h4>
-        <%= event.get('sub_title') %>
-        <span data-attr='sub_title' class="glyphicon glyphicon-pencil"></span>
-      </h4>
+    <h4>
+      <%= event.get('description') %>
+      <% if(is_owned){ %>
+        <span data-attr='description' class="glyphicon glyphicon-pencil"></span>
+      <% } %>
+    </h4>
 
-      <div class='tile-category'>
-        cat:<%= event.get('category') %>
+    <div class='tile-category'>
+      cat:<%= event.get('category') %>
+      <% if(is_owned){ %>
         <span data-attr='category' class="glyphicon glyphicon-pencil"></span>
+      <% } %>
+    </div>
+
+  </div><br><hr><br>
+
+  <div class='row'>
+
+    <div class='col-sm-8'>
+      <div class='tile-body'>
+        Desc:<%= event.get('body') %>
+        <% if(is_owned){ %>
+          <span data-attr='body' class="glyphicon glyphicon-pencil"></span>
+        <% } %>
       </div>
+    </div>
 
-    </div><br><hr><br>
-
-    <div class='row'>
-
-      <div class='col-sm-8'>
-        <div class='tile-description'>
-          Desc:<%= event.get('description') %>
-          <span data-attr='description' class="glyphicon glyphicon-pencil"></span>
-        </div>
-      </div>
-
-      <div class='col-sm-4'>
-        <div class='tile-raised'>
-          $<%= event.get('funds_raised') %> <br>
-          Raised of $<%= event.get('funds_goal') %> goal
+    <div class='col-sm-4'>
+      <div class='tile-raised'>
+        $<span id='amount-raised'><%= event.get('funds_raised') %></span> <br>
+        Raised of $<%= event.get('funds_goal') %> goal
+        <% if(is_owned){ %>
           <span data-attr='funds_goal' class="glyphicon glyphicon-pencil"></span><br>
-          <%= parseInt(event.get('funds_raised')*100/event.get('funds_goal')) %>%<br>
-          <button type="button" class="btn-contribute btn btn-success">Contribute!</button>
+        <% } %>
+        <%= parseInt(event.get('funds_raised')*100/event.get('funds_goal')) %>%<br>
+        <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#fund-modal">
+          Contribute!
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="fund-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Pay up!</h4>
+              </div>
+              <div class="modal-body">
+                contribute to this cause<br>
+                $<input type='text' class='contribution-field' size='10'>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn-contribute btn btn-success" data-dismiss="modal">Fund!</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <img src='<%= event.get('img_src') %>'>
+
+
+      </div>
+      <div>
+        <br><img src='<%= event.get('img_src') %>'>
+        <% if(is_owned){ %>
           <span data-attr='img_src' class="glyphicon glyphicon-pencil"></span>
-        </div>
+        <% } %>
       </div>
     </div>
   </div>
-<% }else{ %>
-  <div class='container'>
-    <div class='row'>
-      <a href='#/events/<%= event.get('id') %>'>
-        <h1><%= event.get('title') %></h1>
-      </a>
-      <img src='<%= event.get('img_src') %>'>
-      <div class='tile-raised'>Raised:<%= event.get('funds_raised') %></div>
-      <div class='tile-goal'>Goal:<%= event.get('funds_goal') %></div>
-      <div class='tile-category'>cat:<%= event.get('category') %></div>
-      <div class='tile-description'>Desc:<%= event.get('description') %></div>
-    </div>
-  </div>
-<% } %>
-
-
-
+</div>
